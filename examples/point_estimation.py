@@ -17,7 +17,7 @@ gaussian_data = data_generation_simple.univariate_gen(distribution='normal', mea
 uniform_avg = np.average(uniform_data)
 gaussian_avg = np.average(gaussian_data)
 
-print(f'True Uniform Mean: {(b-a)/2} -- Estimated Uniform Mean: {uniform_avg}')
+print(f'True Uniform Mean: {(b+a)/2} -- Estimated Uniform Mean: {uniform_avg}')
 print(f'True Gaussian Mean: {mean} -- Estimated Gaussian Mean: {gaussian_avg}')
 
 print('\n---------------------------------------\n')
@@ -25,8 +25,8 @@ print('\n---------------------------------------\n')
 centered_uniform = uniform_data - uniform_avg
 centered_gaussian = gaussian_data - gaussian_avg
 
-uniform_var = np.average(np.square(centered_uniform))
-gaussian_var = np.average(np.square(centered_gaussian))
+uniform_var = np.sum(np.square(centered_uniform)) / (n-1)
+gaussian_var = np.sum(np.square(centered_gaussian)) / (n-1)
 
-print(f'True Uniform Variance: {(b-a)/4} -- Estimated Uniform Variance: {uniform_var}')
-print(f'True Gaussian Mean: {variance} -- Estimated Gaussian Mean: {gaussian_var}')
+print(f'True Uniform Variance: {np.square(b-a)/12} -- Estimated Uniform Variance: {uniform_var}')
+print(f'True Gaussian Variance: {variance} -- Estimated Gaussian Variance: {gaussian_var}')
