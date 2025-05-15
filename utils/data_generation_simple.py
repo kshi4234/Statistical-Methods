@@ -3,8 +3,16 @@ import numpy as np
 # Geenrating data from distributions using numpy provided methods
 
 def univariate_gen(distribution='uniform', n=100, a=0.0, b=1.0, mean=0, variance=1):
+    """Generate univariate data
+    n: number of samples
+    a: lower bound (dependent on distribution)
+    b: upper bound (dependent on distribution)
+    mean: self-explanatory
+    variance: self-explanatory
+    """
     if distribution=='normal':
-        data = mean + variance*np.random.standard_normal(size=n)
+        sigma = np.sqrt(variance)
+        data = mean + sigma*np.random.standard_normal(size=n)
     else:   # uniform is default
         data = np.random.uniform(low=a, high=b, size=n)
     return data
