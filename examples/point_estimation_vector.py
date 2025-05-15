@@ -43,4 +43,4 @@ for i in range(len(centered_gaussian)):
 gaussian_covar = np.sum(sample_covariances, axis=0) / (n-1)
 
 print(f'True Uniform Variance: {np.square(b-a)/12} -- Estimated Uniform Variance: {uniform_var}')
-print(f'True Gaussian Variance: \n{covar} \n Estimated Gaussian Covariance: \n{gaussian_covar}')
+print(f'True Gaussian Covariance: \n{covar} \n Estimated Gaussian Covariance: \n{gaussian_covar}')
