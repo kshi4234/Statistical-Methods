@@ -5,7 +5,7 @@ I hope to learn and implement new inference methods at a rate of around 2 projec
 
 If there are errors in my notes, I welcome any corrections.
 
-<br>
+---
 
 ./utils: Contains various utilities written in Python to help me demonstrate examples and code up larger projects. Also helps to keep things separate and readable.
 
