@@ -12,7 +12,11 @@ import matplotlib.pyplot as plt
 
 def standard_normal(x):
     return np.exp((-1 * np.square(x))/2) / np.sqrt(2*np.pi)
-    
+
+# TODO
+def multivar_normal(x):
+    d = x.shape
+    coeff = 1
 
 n = 100000
 samples = 1000  # Number of samples to compute each sample mean
@@ -46,3 +50,5 @@ print(y_points[2000])
 plt.hist(uniform_bars, bins=500, density=True)
 plt.plot(x_points, y_points)
 plt.show()
+
+# 
