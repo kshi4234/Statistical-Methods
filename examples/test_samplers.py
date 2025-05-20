@@ -26,6 +26,8 @@ def proposal(x):
     return pdf
 
 # Inverse cdf to easily sample from laplace distribution
+# Given that I use a univariate distribution, this exists, but for vector valued cases
+# this may need to be a numerical method.
 def inverse_proposal():
     # The CDF for laplace with scale b=1 is:   0.5 * exp(x-mu) when x <= mu
     # Otherwise, it is 1 - 0.5 * exp(-x+mu) when x >= mu
@@ -39,7 +41,17 @@ def inverse_proposal():
     else:
         inverse = np.log(2*u) + mu
     return inverse
+# ------------------------------------------------------------------------------------------ #
 
+
+# ---------------------------- Test Metropolis-Hastings sampler ---------------------------- #
+# ------------------------------------------------------------------------------------------ #
+
+
+# ------------------------------ Test Hamiltonian MC sampler ------------------------------- #
+# ------------------------------------------------------------------------------------------ #
+
+# Main program
 if __name__ == "__main__":
     coefficient = 2
     samples = samplers.rejection(target, proposal, inverse_proposal, coefficient, n=10000)
@@ -55,3 +67,5 @@ if __name__ == "__main__":
     plt.hist(samples, bins=100, density=True)
     plt.plot(x_points, y_points)
     plt.show()
+    
+    
