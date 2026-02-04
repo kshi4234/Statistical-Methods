@@ -5,7 +5,10 @@ import os
 def load_data(filename, header=0, type='csv', encoding='utf-8'):
     df = ''
     if type == 'csv':
-        df = pd.read_csv(filename, header=header, encoding=encoding)
+        df = pd.read_csv(filename, header=header, encoding=encoding, index_col=False)
+        # df.drop(columns=df.columns[0], axis=1, inplace=True)
+        # print(filename, df.columns)
+        # df.drop(columns=[df.columns[0]], axis=1, inplace=True)
     return df
 
 def load_dataset():

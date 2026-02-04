@@ -1,5 +1,6 @@
 import numpy as np
 from utils import data_loading
+import matplotlib as plt
 
 # Impute missing values in the dataset using regression, as there is not a lot of it.
 def impute(dataset, variables, target):
@@ -8,9 +9,11 @@ def impute(dataset, variables, target):
 def clean(dataset, variables, target):
     """ Some notes on what to clean.
     1) Column 2024. GDP growth data only goes to 2023, not sure why it's included
-    2) Call impute to impute the missing values 
+    2) Call impute to impute the missing values (if missing values present)
     """
-    return
+    dataset.drop(dataset.filter(regex='2024|Unnamed*').columns, axis=1, inplace=True)
+    dataset = dataset.filter(regex=("19*|20*"))
+    return dataset
 
 # Do some exploratory analysis of the data. 
 def data_exploration(dataset, variables, target):
@@ -29,10 +32,16 @@ def data_exploration(dataset, variables, target):
     # TODO: be split into single filer tax brackets. One will be the highest tax bracket,
     # TODO: the other will be the lowest.
     tax_data = dataset[variables[3]]
+    
     us_gdp = gdp_data[gdp_data['Country Code']=='USA']
     us_health = health_data[health_data['Expenditure Amount (Millions)']=='Total National Health Expenditures']
     us_milex = milex_data[milex_data['Country Code']=='USA']
     
+    us_gdp = clean(us_gdp, variables, target)
+    us_health = clean(us_health, variables, target)
+    us_milex = clean(us_milex, variables, target)
+    
+    # print(us_gdp.columns)
     print(us_gdp)
     print(us_health)
     print(us_milex)
@@ -40,9 +49,9 @@ def data_exploration(dataset, variables, target):
 
 def main():
     dataset, variables, target = data_loading.load_dataset()
-    print(variables)
-    print(target)
-    print(dataset[variables[1]])
+    # print(variables)
+    # print(target)
+    # print(dataset[variables[1]])
     data_exploration(dataset, variables, target)
     
 if __name__ == '__main__':
