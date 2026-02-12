@@ -13,11 +13,11 @@ from numpy to double check. I will then plot in 3D to visualize.
 """
 
 def create_exp(mean, covar, x):
-    exp = -1 * np.transpose(x - mean) * covar * (x-mean)
-    return exp
+    exp = -1 * (x - mean) @ covar @ np.transpose(x-mean)
+    return np.exp(exp)
 
-def target_distribution(x):
-    return np.exp(functools.partial(create_exp, x))
+def target_distribution(mean, covar):
+    return functools.partial(create_exp, mean, covar)
 
 """
 The proposal distribution I chose is just the normal distribution. This is basically just a random walk.
@@ -37,7 +37,11 @@ def acceptance_rule(target_distribution, transition_distribution, current, propo
 
 def main(target_distribution=target_distribution, proposal_distribution=proposal_distribution):
     n_params = 2
-    pass
+    mean = np.array([1,2])
+    covar = np.array([[0.1, 2], [0.5, 1.7]])
+    distribution = target_distribution(mean, covar)
+
+    a = acceptance_rule(target_distribution=distribution, pro)
 
 if __name__ == '__main__':
     main()
